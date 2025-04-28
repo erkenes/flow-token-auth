@@ -22,13 +22,13 @@ class HashAndRoles
     protected $rolesHash;
 
     /**
-     * @ORM\Column(type="json_array")
+     * @ORM\Column(type="flow_json_array", nullable=true)
      * @var array
      */
     protected $roles = [];
 
     /**
-     * @ORM\Column(type="json_array")
+     * @ORM\Column(type="flow_json_array", nullable=true)
      * @var array
      */
     protected $settings = [];
