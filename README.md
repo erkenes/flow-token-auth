@@ -6,14 +6,29 @@ allows both sessionless and session-based authentication to be used.
 ## Installation
 
 Run:
-
-    composer require flownative/token-authentication
+```shell
+composer require flownative/token-authentication
+```
 
 ## Usage
 
-Run:
+### Create a token
 
-    ./flow hashtoken:createhashtoken --roleNames Neos.Neos:Editor
+Run:
+```shell
+./flow hashtoken:createhashtoken --roleNames Neos.Neos:Editor
+```
+
+Arguments:
+
+| Argument  | Required | Description                                                 |
+|-----------|----------|-------------------------------------------------------------|
+| roleNames | YES      | The roles with which the token is authenticated             |
+| label     |          | Custom Label for this token                                 |
+| expiresAt |          | Set an expiration date from which the token becomes invalid |
+
+
+### Authenticate with a token
 
 Provide the token in your requests
 
