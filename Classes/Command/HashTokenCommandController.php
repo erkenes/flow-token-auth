@@ -29,12 +29,14 @@ class HashTokenCommandController extends CommandController
      * Create a hash token to login with, authenticating the given roles.
      *
      * @param array $roleNames
+     * @param ?string $label An optional label for the token
+     * @param ?string $expiresAt An optional expiry date / time for the token (anything DateTime($expiresAt) can parse)
      * @throws \Neos\Flow\Persistence\Exception\IllegalObjectTypeException
      */
     public function createHashTokenCommand(
         array $roleNames,
-        string $label = null,
-        string $expiresAt = null
+        ?string $label = null,
+        ?string $expiresAt = null
     ): void
     {
         if (!empty($expiresAt)) {
