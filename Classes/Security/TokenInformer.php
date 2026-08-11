@@ -32,7 +32,7 @@ class TokenInformer
     /**
      * @return HashAndRoles|null
      */
-    public function getToken()
+    public function getToken(): ?HashAndRoles
     {
         if ($this->securityContext->canBeInitialized() !== true) {
             return null;
@@ -44,7 +44,6 @@ class TokenInformer
             return null;
         }
 
-        $hashAndRoles = $this->hashAndRolesRepository->findByIdentifier($account->getAccountIdentifier());
-        return $hashAndRoles;
+        return $this->hashAndRolesRepository->findByIdentifier($account->getAccountIdentifier());
     }
 }

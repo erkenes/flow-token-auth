@@ -38,7 +38,7 @@ class HashTokenProvider extends AbstractProvider
     /**
      * @param TokenInterface $authenticationToken
      */
-    public function authenticate(TokenInterface $authenticationToken)
+    public function authenticate(TokenInterface $authenticationToken): void
     {
         if (!($authenticationToken instanceof SessionStartingHashToken) && !($authenticationToken instanceof HashToken)) {
             throw new UnsupportedAuthenticationTokenException('This provider cannot authenticate the given token.', 1547118072);
@@ -65,12 +65,13 @@ class HashTokenProvider extends AbstractProvider
      * @param TokenInterface $authenticationToken
      * @return HashAndRoles|null
      */
-    protected function getHashAndRoles(TokenInterface $authenticationToken)
+    protected function getHashAndRoles(TokenInterface $authenticationToken): ?HashAndRoles
     {
         $credentials = $authenticationToken->getCredentials();
         if (!is_array($credentials) || !isset($credentials['password'])) {
             return null;
         }
-        return $this->hashAndRolesRepository->findByIdentifier($credentials['password']);
+
+        return $this->hashAndRolesRepository->findOneByIdentifierAndNotExpired($credentials['password']);
     }
 }
