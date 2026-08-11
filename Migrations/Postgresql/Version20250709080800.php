@@ -7,35 +7,30 @@ namespace Neos\Flow\Persistence\Doctrine\Migrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
 final class Version20250709080800 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Add label, expiresat and createdat';
     }
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf(
-            !$this->connection->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\MariaDb1027Platform,
-            "Migration can only be executed safely on '\Doctrine\DBAL\Platforms\MariaDb1027Platform'."
+            !$this->connection->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\PostgreSQLPlatform,
+            "Migration can only be executed safely on '\Doctrine\DBAL\Platforms\PostgreSQLPlatform'."
         );
 
-        $this->addSql('ALTER TABLE flownative_tokenauthentication_security_model_hashandroles ADD COLUMN label VARCHAR(255) DEFAULT NULL, ADD COLUMN expiresat TIMESTAMP DEFAULT NULL, ADD COLUMN createdat TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL');
+        $this->addSql('ALTER TABLE flownative_tokenauthentication_security_model_hashandroles ADD label VARCHAR(255) NULL, ADD expiresat TIMESTAMP(0) DEFAULT NULL, ADD createdat TIMESTAMP(0) DEFAULT NOW()');
     }
 
     public function down(Schema $schema): void
     {
-        // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf(
-            !$this->connection->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\MariaDb1027Platform,
-            "Migration can only be executed safely on '\Doctrine\DBAL\Platforms\MariaDb1027Platform'."
+            !$this->connection->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\PostgreSQLPlatform,
+            "Migration can only be executed safely on '\Doctrine\DBAL\Platforms\PostgreSQLPlatform'."
         );
 
-        $this->addSql('ALTER TABLE flownative_tokenauthentication_security_model_hashandroles DROP COLUMN label, DROP COLUMN expiresat, DROP COLUMN createdat');
+        $this->addSql('ALTER TABLE flownative_tokenauthentication_security_model_hashandroles DROP label, DROP expiresat, DROP createdat');
     }
 }
